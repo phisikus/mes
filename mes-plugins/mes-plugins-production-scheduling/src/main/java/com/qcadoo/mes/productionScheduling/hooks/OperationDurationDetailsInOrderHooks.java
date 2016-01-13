@@ -23,6 +23,10 @@
  */
 package com.qcadoo.mes.productionScheduling.hooks;
 
+import com.qcadoo.mes.costCalculation.constants.CostCalculationConstants;
+import com.qcadoo.mes.costCalculation.constants.CostCalculationFields;
+import com.qcadoo.model.api.DataDefinition;
+import com.qcadoo.model.api.search.SearchRestrictions;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +44,7 @@ import com.qcadoo.view.api.components.WindowComponent;
 import com.qcadoo.view.api.ribbon.RibbonActionItem;
 import com.qcadoo.view.api.ribbon.RibbonGroup;
 
+
 @Service
 public class OperationDurationDetailsInOrderHooks {
 
@@ -55,7 +60,6 @@ public class OperationDurationDetailsInOrderHooks {
     public void fillUnitField(final ViewDefinitionState view) {
         FormComponent orderForm = (FormComponent) view.getComponentByReference(L_FORM);
         FieldComponent unitField = (FieldComponent) view.getComponentByReference(OrderFieldsPS.OPERATION_DURATION_QUANTITY_UNIT);
-
         Long orderId = orderForm.getEntityId();
 
         if (orderId != null) {
@@ -84,6 +88,21 @@ public class OperationDurationDetailsInOrderHooks {
         }
 
         realizationTime.requestUpdate(true);
+    }
+
+    public void fillIncludeComponent(final ViewDefinitionState view) {
+        FormComponent orderForm = (FormComponent) view.getComponentByReference(L_FORM);
+
+        Long orderId = orderForm.getEntityId();
+
+        if (orderId != null) {
+            DataDefinition dataDefinition = dataDefinitionService.get(CostCalculationConstants.PLUGIN_IDENTIFIER, CostCalculationConstants.MODEL_COST_CALCULATION);
+            Entity calculation  = dataDefinition.find().add(SearchRestrictions.eq(CostCalculationFields.ORDER + ".id", orderId)).uniqueResult();
+            if (calculation != null) {
+                FieldComponent includeComponentsField = (FieldComponent) view.getComponentByReference(CostCalculationFields.INCLUDE_COMPONENTS);
+                includeComponentsField.setFieldValue(calculation.getBooleanField(CostCalculationFields.INCLUDE_COMPONENTS));
+            }
+        }
     }
 
     private boolean isGenerated(final ViewDefinitionState view) {

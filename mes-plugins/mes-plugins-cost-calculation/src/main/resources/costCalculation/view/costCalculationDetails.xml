@@ -759,6 +759,17 @@
                 </component>
             </component>
         </windowTab>
+        <windowTab name="includeComponentsTab">
+            <component type="form" name="formIncludeComponents" reference="formIncludeComponents">
+                <component type="gridLayout" name="includeComponentsGrid" reference="includeComponentsGrid"
+                       columns="1" rows="1">
+                    <layoutElement column="1" row="1" height="1">
+                        <component type="checkbox" name="includeComponents" field="#{form}.includeComponents"
+                            reference="includeComponents"/>
+                    </layoutElement>
+                </component>
+            </component>
+        </windowTab>
 
     </component>
 

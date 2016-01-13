@@ -152,6 +152,7 @@
 
 		<datetime name="date" />
 		<boolean name="generated" />
+		<boolean name="includeComponents" default="false" />
 		<string name="fileName" />
 		<boolean name="justCreated" persistent="false" default="true"/>
 	</fields>

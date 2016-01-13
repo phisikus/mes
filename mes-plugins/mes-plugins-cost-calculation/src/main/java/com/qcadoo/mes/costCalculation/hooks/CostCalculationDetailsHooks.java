@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.qcadoo.model.api.*;
+import com.qcadoo.model.api.search.SearchRestrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,9 +46,6 @@ import com.qcadoo.mes.costCalculation.constants.SourceOfOperationCosts;
 import com.qcadoo.mes.costNormsForOperation.constants.CalculateOperationCostMode;
 import com.qcadoo.mes.orders.constants.OrderFields;
 import com.qcadoo.mes.orders.constants.OrderType;
-import com.qcadoo.model.api.BigDecimalUtils;
-import com.qcadoo.model.api.Entity;
-import com.qcadoo.model.api.NumberService;
 import com.qcadoo.view.api.ViewDefinitionState;
 import com.qcadoo.view.api.components.CheckBoxComponent;
 import com.qcadoo.view.api.components.FieldComponent;
@@ -77,6 +76,9 @@ public class CostCalculationDetailsHooks {
     private static final String L_TOTAL_LABOR_HOURLY_COSTS_CURRENCY = "totalLaborHourlyCostsCurrency";
 
     private static final String L_TOTAL_PIECEWORK_COSTS_CURRENCY = "totalPieceworkCostsCurrency";
+
+    @Autowired
+    private DataDefinitionService dataDefinitionService;
 
     @Autowired
     private NumberGeneratorService numberGeneratorService;
@@ -129,6 +131,21 @@ public class CostCalculationDetailsHooks {
         technologyLookup.setFilterValue(filterValueHolder);
     }
 
+    private void fillIncludeComponent(final ViewDefinitionState view) {
+        FormComponent includeComponentsForm = (FormComponent) view.getComponentByReference("formIncludeComponents");
+        LookupComponent orderLookup = (LookupComponent) view.getComponentByReference(CostCalculationFields.ORDER);
+        Entity order = orderLookup.getEntity();
+        if (order != null) {
+            DataDefinition dataDefinition = dataDefinitionService.get(CostCalculationConstants.PLUGIN_IDENTIFIER, CostCalculationConstants.MODEL_COST_CALCULATION);
+            Entity calculation = dataDefinition.find().add(SearchRestrictions.eq(CostCalculationFields.ORDER + ".id", order.getId())).uniqueResult();
+            if (calculation != null) {
+                FieldComponent includeComponentsField = includeComponentsForm.findFieldComponentByName(CostCalculationFields.INCLUDE_COMPONENTS);
+                Boolean includeComponents = calculation.getBooleanField(CostCalculationFields.INCLUDE_COMPONENTS);
+                includeComponentsField.setFieldValue(includeComponents);
+            }
+        }
+    }
+
     public void onBeforeRender(final ViewDefinitionState view) {
         setCriteriaModifierParameters(view);
         setFieldsEnabled(view);
@@ -136,6 +153,7 @@ public class CostCalculationDetailsHooks {
         fillCurrencyFields(view);
         disableCheckboxIfPieceworkIsSelected(view);
         fillOverheadsFromParameters(view);
+        fillIncludeComponent(view);
         toggleCalculateOperationCostsModeComponent(view);
         roundResults(view);
     }
@@ -333,6 +351,7 @@ public class CostCalculationDetailsHooks {
             fillWithProperty("calculateMaterialCostsMode", "calculateMaterialCostsModePB", view);
             fillWithProperty("sourceOfOperationCosts", "sourceOfOperationCostsPB", view);
 
+            fillWithPropertyOrZero("includeComponents", "includeComponents", view);
             fillWithPropertyOrZero("productionCostMargin", "productionCostMarginPB", view);
             fillWithPropertyOrZero("materialCostMargin", "materialCostMarginPB", view);
             fillWithPropertyOrZero("additionalOverhead", "additionalOverheadPB", view);

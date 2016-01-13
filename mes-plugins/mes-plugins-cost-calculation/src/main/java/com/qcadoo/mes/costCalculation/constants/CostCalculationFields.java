@@ -45,6 +45,8 @@ public final class CostCalculationFields {
 
     public static final String PRODUCTION_LINE = "productionLine";
 
+    public static final String INCLUDE_COMPONENTS = "includeComponents";
+
     public static final String CALCULATE_MATERIAL_COSTS_MODE = "calculateMaterialCostsMode";
 
     public static final String SOURCE_OF_OPERATION_COSTS = "sourceOfOperationCosts";
