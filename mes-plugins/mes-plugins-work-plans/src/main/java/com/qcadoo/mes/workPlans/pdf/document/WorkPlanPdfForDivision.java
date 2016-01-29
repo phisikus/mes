@@ -182,7 +182,6 @@ public class WorkPlanPdfForDivision {
                 .getId());
 
         PdfPTable table = pdfHelper.createPanelTable(3);
-        table.setKeepTogether(false);
         table.setSplitLate(false);
 
         PdfPCell headerCell = new PdfPCell();
@@ -315,7 +314,6 @@ public class WorkPlanPdfForDivision {
         PdfPTable table = pdfHelper.createTableWithHeader(columnCount, headers, false, headerAlignments);
         table.setWidths(widths);
         table.setSplitLate(false);
-        table.setKeepTogether(false);
         PdfPCell defaultCell = table.getDefaultCell();
         for (Entity operationProduct : operationProductComponents) {
             for (Map.Entry<OperationProductColumn, ColumnAlignment> e : operationProductColumnAlignmentMap.entrySet()) {
