@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.lowagie.text.pdf.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,11 +48,6 @@ import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.Rectangle;
-import com.lowagie.text.pdf.Barcode128;
-import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfWriter;
 import com.qcadoo.localization.api.TranslationService;
 import com.qcadoo.mes.basic.constants.ProductFields;
 import com.qcadoo.mes.columnExtension.constants.ColumnAlignment;
@@ -182,6 +178,7 @@ public class WorkPlanPdfForDivision {
                 .getId());
 
         PdfPTable table = pdfHelper.createPanelTable(3);
+        table.setHeaderRows(1);
         table.setSplitLate(false);
 
         PdfPCell headerCell = new PdfPCell();
@@ -312,8 +309,10 @@ public class WorkPlanPdfForDivision {
         float[] widths = fill(locale, operationProductColumnAlignmentMap, headers, headerAlignments, direction);
 
         PdfPTable table = pdfHelper.createTableWithHeader(columnCount, headers, false, headerAlignments);
+        table.setHeaderRows(1);
         table.setWidths(widths);
         table.setSplitLate(false);
+
         PdfPCell defaultCell = table.getDefaultCell();
         for (Entity operationProduct : operationProductComponents) {
             for (Map.Entry<OperationProductColumn, ColumnAlignment> e : operationProductColumnAlignmentMap.entrySet()) {
