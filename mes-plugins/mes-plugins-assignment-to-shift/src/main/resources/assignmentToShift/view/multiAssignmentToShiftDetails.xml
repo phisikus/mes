@@ -127,8 +127,6 @@
 				<option type="expression" value="" />
             </component>
         </windowTab>
-
-		<option type="fixedHeight" value="true"/>
     </component>
 
     <hooks>
