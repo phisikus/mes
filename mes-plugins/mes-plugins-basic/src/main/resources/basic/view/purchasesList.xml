@@ -32,6 +32,12 @@
 
         <ribbon>
             <template name="standardGridTemplate"/>
+            <group name="stats">
+                <smallButton name="generateStats" icon="generateIcon24.png">
+                    <script>
+                    </script>
+                </smallButton>
+            </group>
         </ribbon>
 
         <component type="grid" name="purchases" reference="grid">

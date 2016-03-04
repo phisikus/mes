@@ -11,12 +11,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+
 @Service
 @Transactional
 public class PurchaseHooks {
 
   @Autowired
   DataDefinitionService dataDefinitionService;
+
+  public void setDataDefinitionService(DataDefinitionService dataDefinitionService) {
+    this.dataDefinitionService = dataDefinitionService;
+  }
 
   public boolean onCreateCheckDuplicate(final DataDefinition purchaseDD, final Entity purchase) {
     if (purchase != null) {
@@ -51,10 +57,10 @@ public class PurchaseHooks {
 
 
   private SearchCriteriaBuilder getPurchaseDuplicationCriteria(Entity purchase) {
-
-    Entity product = purchase.getBelongsToField("product");
+    Entity product = purchase.getBelongsToField(PurchaseFields.PRODUCT);
+    BigDecimal price = purchase.getDecimalField(PurchaseFields.PRICE);
     return dataDefinitionService.get(BasicConstants.PLUGIN_IDENTIFIER, BasicConstants.MODEL_PURCHASE).find().
-        add(SearchRestrictions.eq(PurchaseFields.PRICE, purchase.getDecimalField(PurchaseFields.PRICE))).
+        add(SearchRestrictions.eq(PurchaseFields.PRICE, price)).
         add(SearchRestrictions.belongsTo(PurchaseFields.PRODUCT, product));
   }
 
