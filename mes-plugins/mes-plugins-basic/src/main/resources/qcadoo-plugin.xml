@@ -278,6 +278,8 @@
 
         <model:model model="palletNumber" resource="model/palletNumber.xml"/>
         <model:model model="palletNumberHelper" resource="model/palletNumberHelper.xml"/>
+        <model:model model="purchase" resource="model/purchase.xml"/>
+
 
         <model:dictionary name="categories"/>
         <model:dictionary name="posts"/>
@@ -303,6 +305,8 @@
         <menu:menu-item name="crews" category="basic" view="crewsList" defaultAuthorizationRole="ROLE_CREW"/>
         <menu:menu-item name="shifts" category="basic" view="shiftsList" defaultAuthorizationRole="ROLE_SHIFTS"/>
         <menu:menu-item name="products" category="basic" view="productsList" defaultAuthorizationRole="ROLE_PRODUCTS"/>
+        <menu:menu-item name="purchases" category="basic" view="purchasesList"
+                        defaultAuthorizationRole="ROLE_PRODUCTS"/>
         <menu:menu-item name="productsFamilies" category="basic"
                         view="productsFamilies" defaultAuthorizationRole="ROLE_PRODUCT_FAMILIES"/>
 
@@ -355,6 +359,8 @@
         <view:view resource="view/productSubstituteComponentDetails.xml"/>
         <view:view resource="view/productsFamilies.xml"/>
         <view:view resource="view/productFamiliesAddProduct.xml"/>
+        <view:view resource="view/purchasesList.xml"/>
+
 
         <view:view resource="view/workstationTypesList.xml"/>
         <view:view resource="view/workstationTypeDetails.xml"/>
@@ -381,6 +387,8 @@
         <view:view resource="view/palletNumberHelperDetails.xml"/>
 
         <view:view-tab resource="view/tabExtensions/userDetailsStaffTab.xml"/>
+
+
 
         <model:model-field plugin="qcadooSecurity" model="user">
             <model:belongsTo model="staff" plugin="basic" name="staff"/>
