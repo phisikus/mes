@@ -47,8 +47,8 @@
             <option type="searchable" value="date,product"/>
             <option type="orderable" value="date,product"/>
 
-            <!--<option type="correspondingView" value="basic/purchaseDetails"/>
-            <option type="correspondingComponent" value="form"/>-->
+            <option type="correspondingView" value="basic/purchaseDetails"/>
+            <option type="correspondingComponent" value="form"/>
 
             <option type="fullscreen" value="true"/>
             <option type="multiselect" value="true"/>
