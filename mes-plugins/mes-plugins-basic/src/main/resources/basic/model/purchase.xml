@@ -41,8 +41,10 @@
 
     </fields>
     <hooks>
-        <validatesWith class="com.qcadoo.mes.basic.hooks.PurchaseHooks"
-                       method="checkIfNotDuplicateProductAndPrice"/>
+        <onCreate class="com.qcadoo.mes.basic.hooks.PurchaseHooks"
+                       method="onCreateCheckDuplicate"/>
+        <onUpdate class="com.qcadoo.mes.basic.hooks.PurchaseHooks"
+                  method="onUpdateCheckDuplicate"/>
     </hooks>
 
 
