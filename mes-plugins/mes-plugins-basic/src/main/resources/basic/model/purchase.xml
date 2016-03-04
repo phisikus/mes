@@ -30,11 +30,11 @@
         <belongsTo name="product" required="true" model="product" plugin="basic"/>
 
         <decimal name="quantity" required="true" default="0">
-            <validatesRange from="0" message="basic.purchase.quantity.error.shouldBeGreaterThanZero"/>
+            <validatesRange from="0" exclusively="true" message="basic.purchase.quantity.error.shouldBeGreaterThanZero"/>
         </decimal>
 
         <decimal name="price" required="true" default="0">
-            <validatesRange from="0" message="basic.purchase.price.error.shouldBeGreaterThanZero"/>
+            <validatesRange from="0" exclusively="true" message="basic.purchase.price.error.shouldBeGreaterThanZero"/>
         </decimal>
 
         <datetime name="date" required="true"/>

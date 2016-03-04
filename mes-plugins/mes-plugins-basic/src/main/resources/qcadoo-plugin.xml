@@ -360,6 +360,7 @@
         <view:view resource="view/productsFamilies.xml"/>
         <view:view resource="view/productFamiliesAddProduct.xml"/>
         <view:view resource="view/purchasesList.xml"/>
+        <view:view resource="view/purchaseDetails.xml"/>
 
 
         <view:view resource="view/workstationTypesList.xml"/>
