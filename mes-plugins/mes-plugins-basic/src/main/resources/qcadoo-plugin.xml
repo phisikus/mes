@@ -362,7 +362,6 @@
         <view:view resource="view/purchasesList.xml"/>
         <view:view resource="view/purchaseDetails.xml"/>
 
-
         <view:view resource="view/workstationTypesList.xml"/>
         <view:view resource="view/workstationTypeDetails.xml"/>
 

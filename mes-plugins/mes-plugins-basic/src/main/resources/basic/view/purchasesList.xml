@@ -29,16 +29,20 @@
       name="purchasesList" modelName="purchase" menuAccessible="true">
 
     <component type="window" name="window">
-
         <ribbon>
             <template name="standardGridTemplate"/>
             <group name="stats">
-                <smallButton name="generateStats" icon="generateIcon24.png">
-                    <script>
-                    </script>
-                </smallButton>
+                <bigButton name="generateStats" icon="generateIcon24.png"
+                           action="#{window}.fireEvent(getAveragePriceOfAllPurchases);" state="enabled"/>
             </group>
         </ribbon>
+
+        <listener event="getAveragePriceOfAllPurchases" class="com.qcadoo.mes.basic.PurchaseService"
+                  method="getAveragePriceOfAllPurchases"/>
+
+        <component type="label" name="averagePrice">
+            <option type="labelStyle" value="normal"/>
+        </component>
 
         <component type="grid" name="purchases" reference="grid">
 
@@ -46,7 +50,6 @@
             <option type="column" name="product" fields="product" expression="#product['name']" link="true"/>
             <option type="column" name="quantity" fields="quantity" link="true"/>
             <option type="column" name="price" fields="price" link="true"/>
-
 
             <option type="order" column="date" direction="desc"/>
 
@@ -62,6 +65,49 @@
 
         <option type="fixedHeight" value="true"/>
         <option type="header" value="false"/>
+
+        <script>
+            <![CDATA[
+            function GetURLParameter(sParam)
+            {
+                 var sPageURL = window.location.search.substring(1);
+                 var sURLVariables = sPageURL.split('&');
+                 for (var i = 0; i < sURLVariables.length; i++)
+                 {
+                    var sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] == sParam)
+                    {
+                        return sParameterName[1];
+                    }
+                 }
+            }
+
+            function getAveragePrice(parameterName)
+            {
+                var averagePrice = GetURLParameter(parameterName)
+                var averagePriceValue = "-";
+                if(averagePrice != null && !isNaN(averagePrice))
+                {
+                    averagePriceValue =  parseFloat(averagePrice).toFixed(2);
+                }
+                return averagePriceValue;
+            }
+
+            function addPriceLabel(labelName, value)
+            {
+                var priceLabel = document.getElementById(labelName);
+                var priceValueContainer = document.createElement("span");
+                priceLabel.style.display = "inline";
+                priceValueContainer.innerHTML = value;
+                priceValueContainer.className = "component_label";
+                priceLabel.appendChild(priceValueContainer);
+            }
+
+            addPriceLabel("window.mainTab.averagePrice", getAveragePrice("averagePrice"));
+
+            ]]>
+        </script>
+
     </component>
 
 </view>
