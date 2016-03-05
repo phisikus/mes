@@ -23,7 +23,7 @@
     ***************************************************************************
 
 -->
-<view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" defaultAuthorizationRole="ROLE_PRODUCTS"
+<view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" defaultAuthorizationRole="ROLE_PURCHASES"
       xmlns="http://schema.qcadoo.org/view"
       xsi:schemaLocation="http://schema.qcadoo.org/view http://schema.qcadoo.org/view.xsd"
       name="purchaseDetails" modelName="purchase">

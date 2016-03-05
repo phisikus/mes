@@ -247,6 +247,8 @@
 
         <security:role identifier="ROLE_ACTIONS" description="Dostęp do czynności"/>
 
+        <security:role identifier="ROLE_PURCHASES" description="Dostęp do zakupów"/>
+
         <model:model model="company" resource="model/company.xml"/>
         <model:model model="staff" resource="model/staff.xml"/>
         <model:model model="crew" resource="model/crew.xml"/>
@@ -306,7 +308,7 @@
         <menu:menu-item name="shifts" category="basic" view="shiftsList" defaultAuthorizationRole="ROLE_SHIFTS"/>
         <menu:menu-item name="products" category="basic" view="productsList" defaultAuthorizationRole="ROLE_PRODUCTS"/>
         <menu:menu-item name="purchases" category="basic" view="purchasesList"
-                        defaultAuthorizationRole="ROLE_PRODUCTS"/>
+                        defaultAuthorizationRole="ROLE_PURCHASES"/>
         <menu:menu-item name="productsFamilies" category="basic"
                         view="productsFamilies" defaultAuthorizationRole="ROLE_PRODUCT_FAMILIES"/>
 
