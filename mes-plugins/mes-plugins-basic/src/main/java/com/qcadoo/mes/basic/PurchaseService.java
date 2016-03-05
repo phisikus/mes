@@ -21,6 +21,7 @@ public class PurchaseService {
   @Autowired
   private DataDefinitionService dataDefinitionService;
 
+
   public void getAveragePriceOfAllPurchases(final ViewDefinitionState view, final ComponentState componentState, final String[] args) {
     SearchResult resultList = dataDefinitionService.get(BasicConstants.PLUGIN_IDENTIFIER, BasicConstants.MODEL_PURCHASE).find().list();
     List<Entity> purchases = resultList.getEntities();
