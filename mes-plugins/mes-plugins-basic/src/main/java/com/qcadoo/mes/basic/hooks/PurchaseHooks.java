@@ -17,47 +17,47 @@ import java.math.BigDecimal;
 @Transactional
 public class PurchaseHooks {
 
-  @Autowired
-  DataDefinitionService dataDefinitionService;
+    @Autowired
+    DataDefinitionService dataDefinitionService;
 
-  public boolean onCreateCheckDuplicate(final DataDefinition purchaseDD, final Entity purchase) {
-    if (purchase != null) {
-      Entity existingDuplicate = getDuplicatePurchase(purchase);
+    public boolean onCreateCheckDuplicate(final DataDefinition purchaseDD, final Entity purchase) {
+        if (purchase != null) {
+            Entity existingDuplicate = getDuplicatePurchase(purchase);
 
-      if (existingDuplicate != null) {
-        purchase.addGlobalError("basic.purchase.error.isNotUnique");
-        return false;
-      }
-    }
-    return true;
-  }
-
-  public boolean onUpdateCheckDuplicate(final DataDefinition purchaseDD, final Entity purchase) {
-    if (purchase != null) {
-      Entity existingDuplicate = getDuplicatePurchase(purchase);
-
-      if (existingDuplicate != null) {
-        if (purchase.getId() != null && !purchase.getId().equals(existingDuplicate.getId())) {
-          purchase.addGlobalError("basic.purchase.error.isNotUnique");
-          return false;
+            if (existingDuplicate != null) {
+                purchase.addGlobalError("basic.purchase.error.isNotUnique");
+                return false;
+            }
         }
-      }
+        return true;
     }
-    return true;
-  }
 
-  private Entity getDuplicatePurchase(Entity purchase) {
-    SearchCriteriaBuilder duplicateCriteria = getPurchaseDuplicationCriteria(purchase);
-    return duplicateCriteria.setMaxResults(1).uniqueResult();
-  }
+    public boolean onUpdateCheckDuplicate(final DataDefinition purchaseDD, final Entity purchase) {
+        if (purchase != null) {
+            Entity existingDuplicate = getDuplicatePurchase(purchase);
+
+            if (existingDuplicate != null) {
+                if (purchase.getId() != null && !purchase.getId().equals(existingDuplicate.getId())) {
+                    purchase.addGlobalError("basic.purchase.error.isNotUnique");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private Entity getDuplicatePurchase(Entity purchase) {
+        SearchCriteriaBuilder duplicateCriteria = getPurchaseDuplicationCriteria(purchase);
+        return duplicateCriteria.setMaxResults(1).uniqueResult();
+    }
 
 
-  private SearchCriteriaBuilder getPurchaseDuplicationCriteria(Entity purchase) {
-    Entity product = purchase.getBelongsToField(PurchaseFields.PRODUCT);
-    BigDecimal price = purchase.getDecimalField(PurchaseFields.PRICE);
-    return dataDefinitionService.get(BasicConstants.PLUGIN_IDENTIFIER, BasicConstants.MODEL_PURCHASE).find().
-        add(SearchRestrictions.eq(PurchaseFields.PRICE, price)).
-        add(SearchRestrictions.belongsTo(PurchaseFields.PRODUCT, product));
-  }
+    private SearchCriteriaBuilder getPurchaseDuplicationCriteria(Entity purchase) {
+        Entity product = purchase.getBelongsToField(PurchaseFields.PRODUCT);
+        BigDecimal price = purchase.getDecimalField(PurchaseFields.PRICE);
+        return dataDefinitionService.get(BasicConstants.PLUGIN_IDENTIFIER, BasicConstants.MODEL_PURCHASE).find().
+            add(SearchRestrictions.eq(PurchaseFields.PRICE, price)).
+            add(SearchRestrictions.belongsTo(PurchaseFields.PRODUCT, product));
+    }
 
 }
