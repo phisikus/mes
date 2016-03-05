@@ -20,10 +20,6 @@ public class PurchaseHooks {
   @Autowired
   DataDefinitionService dataDefinitionService;
 
-  public void setDataDefinitionService(DataDefinitionService dataDefinitionService) {
-    this.dataDefinitionService = dataDefinitionService;
-  }
-
   public boolean onCreateCheckDuplicate(final DataDefinition purchaseDD, final Entity purchase) {
     if (purchase != null) {
       Entity existingDuplicate = getDuplicatePurchase(purchase);
