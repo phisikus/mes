@@ -31,12 +31,17 @@ public class PurchaseService {
 
   private BigDecimal getAveragePrice(List<Entity> purchases) {
     BigDecimal sum = new BigDecimal(0L);
-    BigDecimal size = new BigDecimal(purchases.size());
+    int size = purchases.size();
+
     for (Entity purchase : purchases) {
       sum = sum.add(purchase.getDecimalField(PurchaseFields.PRICE));
     }
-    BigDecimal average = sum.divide(size);
-    return average;
+
+    if (size > 0) {
+      return sum.divide(new BigDecimal(size));
+    } else {
+      return sum;
+    }
   }
 
 }
