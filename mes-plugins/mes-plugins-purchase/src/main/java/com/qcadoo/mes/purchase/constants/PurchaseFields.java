@@ -1,4 +1,4 @@
-package com.qcadoo.mes.basic.constants;
+package com.qcadoo.mes.purchase.constants;
 
 
 public final class PurchaseFields {

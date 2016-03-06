@@ -1,7 +1,8 @@
-package com.qcadoo.mes.basic.hooks;
+package com.qcadoo.mes.purchase.hooks;
 
 import com.qcadoo.mes.basic.constants.BasicConstants;
-import com.qcadoo.mes.basic.constants.PurchaseFields;
+import com.qcadoo.mes.purchase.constants.PurchaseConstans;
+import com.qcadoo.mes.purchase.constants.PurchaseFields;
 import com.qcadoo.model.api.DataDefinition;
 import com.qcadoo.model.api.DataDefinitionService;
 import com.qcadoo.model.api.Entity;
@@ -25,7 +26,7 @@ public class PurchaseHooks {
             Entity existingDuplicate = getDuplicatePurchase(purchase);
 
             if (existingDuplicate != null) {
-                purchase.addGlobalError("basic.purchase.error.isNotUnique");
+                purchase.addGlobalError("purchase.error.isNotUnique");
                 return false;
             }
         }
@@ -38,7 +39,7 @@ public class PurchaseHooks {
 
             if (existingDuplicate != null) {
                 if (purchase.getId() != null && !purchase.getId().equals(existingDuplicate.getId())) {
-                    purchase.addGlobalError("basic.purchase.error.isNotUnique");
+                    purchase.addGlobalError("purchase.error.isNotUnique");
                     return false;
                 }
             }
@@ -55,7 +56,7 @@ public class PurchaseHooks {
     private SearchCriteriaBuilder getPurchaseDuplicationCriteria(Entity purchase) {
         Entity product = purchase.getBelongsToField(PurchaseFields.PRODUCT);
         BigDecimal price = purchase.getDecimalField(PurchaseFields.PRICE);
-        return dataDefinitionService.get(BasicConstants.PLUGIN_IDENTIFIER, BasicConstants.MODEL_PURCHASE).find().
+        return dataDefinitionService.get(PurchaseConstans.PLUGIN_IDENTIFIER, PurchaseConstans.MODEL_PURCHASE).find().
             add(SearchRestrictions.eq(PurchaseFields.PRICE, price)).
             add(SearchRestrictions.belongsTo(PurchaseFields.PRODUCT, product));
     }

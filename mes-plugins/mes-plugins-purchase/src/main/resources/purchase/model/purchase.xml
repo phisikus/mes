@@ -30,23 +30,21 @@
         <belongsTo name="product" required="true" model="product" plugin="basic"/>
 
         <decimal name="quantity" required="true" default="0">
-            <validatesRange from="0" exclusively="true" message="basic.purchase.quantity.error.shouldBeGreaterThanZero"/>
+            <validatesRange from="0" exclusively="true" message="purchase.quantity.error.shouldBeGreaterThanZero"/>
         </decimal>
 
         <decimal name="price" required="true" default="0">
-            <validatesRange from="0" exclusively="true" message="basic.purchase.price.error.shouldBeGreaterThanZero"/>
+            <validatesRange from="0" exclusively="true" message="purchase.price.error.shouldBeGreaterThanZero"/>
         </decimal>
 
         <datetime name="date" required="true"/>
 
     </fields>
     <hooks>
-        <onCreate class="com.qcadoo.mes.basic.hooks.PurchaseHooks"
+        <onCreate class="com.qcadoo.mes.purchase.hooks.PurchaseHooks"
                        method="onCreateCheckDuplicate"/>
-        <onUpdate class="com.qcadoo.mes.basic.hooks.PurchaseHooks"
+        <onUpdate class="com.qcadoo.mes.purchase.hooks.PurchaseHooks"
                   method="onUpdateCheckDuplicate"/>
     </hooks>
-
-
     <identifier expression="#date + ' - ' + #product['name'] + ' - ' + #quantity"/>
 </model>
