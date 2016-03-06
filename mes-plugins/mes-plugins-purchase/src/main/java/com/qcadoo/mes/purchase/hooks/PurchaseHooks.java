@@ -1,7 +1,6 @@
 package com.qcadoo.mes.purchase.hooks;
 
-import com.qcadoo.mes.basic.constants.BasicConstants;
-import com.qcadoo.mes.purchase.constants.PurchaseConstans;
+import com.qcadoo.mes.purchase.constants.PurchaseConstants;
 import com.qcadoo.mes.purchase.constants.PurchaseFields;
 import com.qcadoo.model.api.DataDefinition;
 import com.qcadoo.model.api.DataDefinitionService;
@@ -56,7 +55,7 @@ public class PurchaseHooks {
     private SearchCriteriaBuilder getPurchaseDuplicationCriteria(Entity purchase) {
         Entity product = purchase.getBelongsToField(PurchaseFields.PRODUCT);
         BigDecimal price = purchase.getDecimalField(PurchaseFields.PRICE);
-        return dataDefinitionService.get(PurchaseConstans.PLUGIN_IDENTIFIER, PurchaseConstans.MODEL_PURCHASE).find().
+        return dataDefinitionService.get(PurchaseConstants.PLUGIN_IDENTIFIER, PurchaseConstants.MODEL_PURCHASE).find().
             add(SearchRestrictions.eq(PurchaseFields.PRICE, price)).
             add(SearchRestrictions.belongsTo(PurchaseFields.PRODUCT, product));
     }

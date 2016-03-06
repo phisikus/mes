@@ -1,7 +1,6 @@
 package com.qcadoo.mes.purchase;
 
-import com.qcadoo.mes.basic.constants.BasicConstants;
-import com.qcadoo.mes.purchase.constants.PurchaseConstans;
+import com.qcadoo.mes.purchase.constants.PurchaseConstants;
 import com.qcadoo.model.api.DataDefinition;
 import com.qcadoo.model.api.DataDefinitionService;
 import com.qcadoo.model.api.Entity;
@@ -49,7 +48,7 @@ public class PurchaseServiceTest {
   public final void init() {
     MockitoAnnotations.initMocks(this);
     purchaseService = new PurchaseService();
-    given(dataDefinitionService.get(PurchaseConstans.PLUGIN_IDENTIFIER, PurchaseConstans.MODEL_PURCHASE)).willReturn(dataDefinition);
+    given(dataDefinitionService.get(PurchaseConstants.PLUGIN_IDENTIFIER, PurchaseConstants.MODEL_PURCHASE)).willReturn(dataDefinition);
     given(dataDefinition.find()).willReturn(searchCriteriaBuilder);
     ReflectionTestUtils.setField(purchaseService, "dataDefinitionService", dataDefinitionService);
   }

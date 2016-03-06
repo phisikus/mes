@@ -75,6 +75,7 @@
         <view:view resource="view/purchaseDetails.xml"/>
 
         <!--<view:resource uri="public/**/*"/>-->
+
     </modules>
 
     <features>

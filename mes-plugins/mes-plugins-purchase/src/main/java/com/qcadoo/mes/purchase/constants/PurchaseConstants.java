@@ -1,7 +1,7 @@
 package com.qcadoo.mes.purchase.constants;
 
 
-public class PurchaseConstans {
+public class PurchaseConstants {
 
     public static final String PLUGIN_IDENTIFIER = "purchase";
 

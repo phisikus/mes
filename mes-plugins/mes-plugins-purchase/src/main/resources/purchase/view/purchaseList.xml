@@ -56,7 +56,7 @@
             <option type="searchable" value="date,product"/>
             <option type="orderable" value="date,product"/>
 
-            <option type="correspondingView" value="basic/purchaseDetails"/>
+            <option type="correspondingView" value="purchase/purchaseDetails"/>
             <option type="correspondingComponent" value="form"/>
 
             <option type="fullscreen" value="true"/>

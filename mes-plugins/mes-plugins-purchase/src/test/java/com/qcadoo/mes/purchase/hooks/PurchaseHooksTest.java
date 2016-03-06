@@ -1,8 +1,7 @@
 package com.qcadoo.mes.purchase.hooks;
 
 
-import com.qcadoo.mes.basic.constants.BasicConstants;
-import com.qcadoo.mes.purchase.constants.PurchaseConstans;
+import com.qcadoo.mes.purchase.constants.PurchaseConstants;
 import com.qcadoo.mes.purchase.constants.PurchaseFields;
 import com.qcadoo.model.api.DataDefinition;
 import com.qcadoo.model.api.DataDefinitionService;
@@ -42,7 +41,7 @@ public class PurchaseHooksTest {
     public final void init() {
         MockitoAnnotations.initMocks(this);
         purchaseHooks = new PurchaseHooks();
-        given(dataDefinitionService.get(PurchaseConstans.PLUGIN_IDENTIFIER, PurchaseConstans.MODEL_PURCHASE)).willReturn(dataDefinition);
+        given(dataDefinitionService.get(PurchaseConstants.PLUGIN_IDENTIFIER, PurchaseConstants.MODEL_PURCHASE)).willReturn(dataDefinition);
         given(dataDefinition.find()).willReturn(searchCriteriaBuilder);
         given(searchCriteriaBuilder.add(any())).willReturn(searchCriteriaBuilder);
         given(searchCriteriaBuilder.setMaxResults(anyInt())).willReturn(searchCriteriaBuilder);

@@ -1,7 +1,6 @@
 package com.qcadoo.mes.purchase;
 
-import com.qcadoo.mes.basic.constants.BasicConstants;
-import com.qcadoo.mes.purchase.constants.PurchaseConstans;
+import com.qcadoo.mes.purchase.constants.PurchaseConstants;
 import com.qcadoo.mes.purchase.constants.PurchaseFields;
 import com.qcadoo.model.api.DataDefinitionService;
 import com.qcadoo.model.api.Entity;
@@ -17,14 +16,14 @@ import java.util.List;
 @Service
 public class PurchaseService {
 
-  final private String purchasesListUrl = "../page/basic/purchaseList.html";
+  final private String purchasesListUrl = "../page/purchase/purchaseList.html";
 
   @Autowired
   private DataDefinitionService dataDefinitionService;
 
 
   public void getAveragePriceOfAllPurchases(final ViewDefinitionState view, final ComponentState componentState, final String[] args) {
-    SearchResult resultList = dataDefinitionService.get(PurchaseConstans.PLUGIN_IDENTIFIER, PurchaseConstans.MODEL_PURCHASE).find().list();
+    SearchResult resultList = dataDefinitionService.get(PurchaseConstants.PLUGIN_IDENTIFIER, PurchaseConstants.MODEL_PURCHASE).find().list();
     List<Entity> purchases = resultList.getEntities();
     BigDecimal averagePrice = getAveragePrice(purchases);
     String url = purchasesListUrl + "?averagePrice=" + averagePrice;
