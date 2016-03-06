@@ -52,12 +52,12 @@ public class PurchaseHooksTest {
     }
 
     @Test
-    public final void onCreateCheckDuplicateNullTest() {
+    public final void shouldWorkWithNullValuesTest() {
         assertEquals(purchaseHooks.onCreateCheckDuplicate(null, null), true);
     }
 
     @Test
-    public final void onCreateCheckDuplicateTest() {
+    public final void shouldProperlyVerifyNewEntity() {
         ArgumentCaptor<SearchCriterion> restrictionCaptor = ArgumentCaptor.forClass(SearchCriterion.class);
 
         assertFalse(purchaseHooks.onCreateCheckDuplicate(dataDefinition, purchase));
@@ -71,7 +71,7 @@ public class PurchaseHooksTest {
 
 
     @Test
-    public final void onUpdateCheckDuplicateTest() {
+    public final void shouldProperlyVerifyExistingEntity() {
         ArgumentCaptor<SearchCriterion> restrictionCaptor = ArgumentCaptor.forClass(SearchCriterion.class);
 
         assertTrue(purchaseHooks.onUpdateCheckDuplicate(dataDefinition, purchase));
