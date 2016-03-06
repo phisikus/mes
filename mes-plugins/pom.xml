@@ -18,6 +18,7 @@
     <modules>
         <module>mes-plugins-orders</module>
         <module>mes-plugins-basic</module>
+        <module>mes-plugins-purchase</module>
         <module>mes-plugins-quality-controls</module>
         <module>mes-plugins-material-requirements</module>
         <module>mes-plugins-work-plans</module>
